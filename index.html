@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EaglercraftX – Your Server</title>
+  <script src="https://cdn.jsdelivr.net/gh/ayunami2000/eaglercraftx@main/dist/eaglercraftx.min.js"></script>
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+    #game { width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+  <canvas id="game"></canvas>
+  <script>
+    EaglercraftX.init({
+      canvas: document.getElementById("game"),
+      server: "wss://eagler-proxy.onrender.com",
+      version: "r1.8",  // for Minecraft 1.8.8 support
+      username: prompt("Enter your username", "Player" + Math.floor(Math.random()*1000)),
+    });
+  </script>
+</body>
+</html>
