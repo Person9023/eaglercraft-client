@@ -2,31 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>EaglercraftX – Your Server</title>
-  <script src="https://cdn.jsdelivr.net/gh/ayunami2000/eaglercraft@main/dist/eaglercraft.min.js"></script>
+  <title>Eaglercraft Client Proxy</title>
   <style>
-    html, body {
-      margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
-      background-color: black;
-    }
-    #gameCanvas {
-      display: block;
-      width: 100vw;
-      height: 100vh;
+    html, body, canvas {
+      margin: 0; padding: 0; width: 100%; height: 100%; display: block; background: black;
     }
   </style>
 </head>
 <body>
   <canvas id="gameCanvas"></canvas>
+
+  <!-- Load official Eaglercraft client scripts -->
+  <script src="https://static.eaglercraft.org/eaglercraft-client.js"></script>
+
   <script>
-    window.eaglercraftOpts = {
-      container: document.getElementById("gameCanvas"),
-      assetsURI: "https://cdn.jsdelivr.net/gh/ayunami2000/eaglercraft@main/dist/assets.epk",
-      server: "wss://eagler-proxy.onrender.com",
-      username: "Player" + Math.floor(Math.random() * 1000),
+    // Override the connect function to use your WebSocket proxy URL
+    const originalConnect = window.connect || function(server) {
+      console.log("Original connect called with", server);
     };
+
+    window.connect = function(server) {
+      console.log("Connecting to proxy WebSocket server:", server);
+      // Force your proxy URL instead of default
+      originalConnect("wss://eagler-proxy.onrender.com");
+    };
+
+    // Automatically call connect on page load with any param (ignored)
     window.onload = () => {
-      Eaglercraft.init(window.eaglercraftOpts);
+      window.connect("wss://placeholder");
     };
   </script>
 </body>
