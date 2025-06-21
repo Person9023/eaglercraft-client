@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EaglercraftX – Your Server</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ayunami2000/eaglercraftXreplit@main/index.js"></script>
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+    canvas { display: block; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+  <script>
+    window.addEventListener("load", () => {
+      window.eaglercraftOpts = {
+        container: document.getElementById("gameCanvas"),
+        assetsURI: "https://cdn.jsdelivr.net/gh/ayunami2000/eaglercraftXreplit@main/assets.epk",
+        server: "wss://eagler-proxy.onrender.com"
+      };
+      main();
+    });
+  </script>
+</body>
+</html>
