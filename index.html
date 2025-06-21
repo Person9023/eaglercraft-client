@@ -12,25 +12,19 @@
 <body>
   <canvas id="gameCanvas"></canvas>
 
-  <!-- Load official Eaglercraft client scripts -->
+  <!-- Official Eaglercraft client -->
   <script src="https://static.eaglercraft.org/eaglercraft-client.js"></script>
 
   <script>
-    // Override the connect function to use your WebSocket proxy URL
-    const originalConnect = window.connect || function(server) {
-      console.log("Original connect called with", server);
-    };
-
-    window.connect = function(server) {
-      console.log("Connecting to proxy WebSocket server:", server);
-      // Force your proxy URL instead of default
-      originalConnect("wss://eagler-proxy.onrender.com");
-    };
-
-    // Automatically call connect on page load with any param (ignored)
-    window.onload = () => {
-      window.connect("wss://placeholder");
-    };
+    // Wait until the client script loads
+    window.addEventListener('load', () => {
+      if (typeof connect === 'function') {
+        console.log("Connecting to proxy...");
+        connect("wss://eagler-proxy.onrender.com");
+      } else {
+        console.error("Eaglercraft client connect function not found.");
+      }
+    });
   </script>
 </body>
 </html>
